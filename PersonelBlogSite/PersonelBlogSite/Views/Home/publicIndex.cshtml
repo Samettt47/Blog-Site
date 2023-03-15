@@ -1,0 +1,60 @@
+﻿
+
+<header class="masthead" style="background-image: url('img/post-sample-image.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="post-heading">
+                    <h1>Don’t expect success unless you step of your comfort zone.</h1>
+                    <h2 class="subheading">Believe YourSelf</h2>
+                    <span class="meta">
+                        Created by
+                        Samet Bayraktar
+                        03.07.2023
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+
+
+
+            <div class="post-preview">
+                <a>
+                    <h2 class="post-title">
+                        İçeriği Görebilmek için giriş yapmanız gerekmektedir.
+                    </h2>
+                    <h3 class="post-subtitle">
+                        Bu bir blog sayfasıdır.
+
+                    </h3>
+                </a>
+                <p class="post-meta">
+                    İstediğiniz kategorilerde blog ekleyip istediğiniz gibi bilgiler verebilirsiniz.
+                    Createdd By Samet Bayraktar.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@using System.Text.Unicode
+@using System.Text.Encodings
+
+
+
+@if (TempData["SuccesMessage"] != null)
+{
+    <script>
+        var message = '@Html.Raw(@TempData["SuccesMessage"])';
+        alert(message);
+        </script>
+
+}

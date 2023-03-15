@@ -1,0 +1,47 @@
+﻿    
+@model IEnumerable<AdminBlog.Models.Blog>
+
+
+<button type="button" id="route"   class="btn btn-primary">Blog Ekle</button>
+<br />
+
+
+<table class="table table-hover">
+    <thead>
+    <th scope="col">Id</th>
+    <th scope="col">AuthorName</th>
+   
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="col">@item.Id</th>
+                <td scope="col">@item.Title</td>
+             
+                <td>
+                    @if (item.isPublish)
+                    {
+                        <a class="btn btn-success" >Yayınlandı</a>
+
+                    }
+                    else
+                    {
+                        <a class="btn btn-light" asp-route-id="@item.Id" asp-action="Publish">Yayınla</a>
+
+                    }
+                </td>   
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section Scripts
+{
+<script>
+    document.getElementById('route').addEventListener('click', function () {
+        window.location.href = '/Blog/Blog'
+    })
+</script>
+}

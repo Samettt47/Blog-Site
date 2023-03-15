@@ -1,0 +1,127 @@
+﻿
+@model IEnumerable<AdminBlog.Models.Author>
+
+
+<button type="button" onclick="$('#AuthorModal').modal('show')" class="btn btn-primary">Author Ekle</button>
+
+<table class="table table-hover">
+    <thead>
+    <th scope="col">Id</th>
+    <th scope="col">AuthorName</th>
+    <th scope="col">AuthorSurname</th>
+    <th scope="col">E-Mail</th>
+    <th scope="col">Password</th>
+    <th scope="col"></th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <th scope="col">@item.Id</th>
+            <td scope="col">@item.Name</td>
+            <td scope="col">@item.Surname</td>
+            <td scope="col">@item.Email</td>
+            <td scope="col">@item.Password</td>
+            <td>
+                <a class="btn btn-danger" asp-route-id="@item.Id" asp-action="DeleteAuthor">Sil</a>
+                <button type="button" onclick="openUpdateModal(@item.Id)" class="btn btn-secondary">Güncelle</button>
+            </td>
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+
+
+<div class="modal" id="AuthorModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Yazar :</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <a href="C:\Users\samet\source\repos\AdminBlog\AdminBlog\Views\Author\Author.cshtml"></a>
+            </div>
+            <form asp-action="AddAuthor" method="post" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="Id" id="Id" class="form-control" />
+                        <input type="text" name="Name" id="name" class="form-control"  placeholder="Name"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="SurName" id="surname" class="form-control" placeholder="Surname"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="Email" id="email" class="form-control"  placeholder="Email"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="Password" id="password" class="form-control"  placeholder="Password"/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    <button type="submit" id="saveBtn" class="btn btn-primary" name="Id">Kayıt Ol</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="AuthorUpdateModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Kategori :</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="UpdateAuthor" method="post" autocomplete="off">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="Id" id="ID" class="form-control"  />
+                        <input type="text" name="Name" id="Name" class="form-control" placeholder="Name" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="SurName" id="SurName" class="form-control" placeholder="Surname" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="Email" id="Email" class="form-control" placeholder="Email" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="Password" id="Password" class="form-control"  placeholder="Password"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+
+                    <button type="submit" id="updateBtn" class="btn btn-primary" name="Id">Guncelle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function openUpdateModal(id) {
+
+            fetch('/Author/AuthorDetails?Id=' + id)
+                .then(res => res.json())
+                .then(res => {
+
+                    $('#ID').val(res.id)
+                    $('#Name').val(res.name)
+                    $('#SurName').val(res.surname)
+                    $('#Email').val(res.email)
+                    $('#Password').val(res.passsword)
+
+                })
+
+            $('#AuthorUpdateModal').modal('show');
+        }
+    </script>
+}
