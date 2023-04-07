@@ -1,5 +1,3 @@
-using System;
-
 namespace PersonelBlogSite.Models
 {
     public class ErrorViewModel

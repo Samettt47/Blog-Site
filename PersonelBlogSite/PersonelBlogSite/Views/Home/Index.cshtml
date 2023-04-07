@@ -1,8 +1,9 @@
-﻿@model IEnumerable<PersonelBlogSite.Models.Blog>
+﻿@model Tuple<List<PersonelBlogSite.Models.Blog>, Author>
 
 @using Microsoft.AspNetCore.Http
 @{
     int? id = Context.Session.GetInt32("id");
+    int? id1 = Context.Session.GetInt32("id1");
 }
 
 <header class="masthead" style="background-image: url('img/img2.jpg') ">
@@ -23,49 +24,56 @@
     </div>
 </header>
 
+
     
-    <button type="button" id="route" class="btn btn-primary" >Blog Ekle</button>
-
-    <br />
-
-
-    <div class="container">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-
-                @foreach (var item in Model)
-                {
-
-                    <div class="post-preview">
-                        <a asp-action="Post" asp-route-id="@item.Id">
-                            <h2 class="post-title">
-                                @item.Title
-                            </h2>
-                            <h3 class="post-subtitle">
-                                @item.Subtitle
-                            </h3>
-                        </a>
-                        <p class="post-meta">
-                            Posted by
-                            @item.Author.Name
-                            @item.dateTime ' da yayınlandı
-                        </p>
-                    </div>
+        <a  id="route" class="btn btn-primary" asp-action="addBlog" asp-route-id="@Model.Item2.Id">Blog Ekle</a>
+    
+        <br />
 
 
+<div class="container">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
 
+            @foreach (var item in Model.Item1)
+            {
 
-
-                }
-
-                <div class="col-md-10 col-lg-8 col-xl-7">
-
-                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                <div class="post-preview">
+                    <a asp-action="Post" asp-route-id="@item.Id">
+                        <h2 class="post-title">
+                            @item.Title
+                        </h2>
+                        <h3 class="post-subtitle">
+                            @item.Subtitle
+                        </h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by
+                        @item.Author.Name
+                        @item.dateTime ' da yayınlandı
+                    </p>
                 </div>
-            </div>
-        </div>
 
+            }
+
+        <nav>
+            <ul class="pagination justify-content-center" >
+                @for(int i = 1; i<= ViewBag.PageCount; i++) { 
+                    
+                    <li class="page-item @(ViewBag.CurrenPage == i ? "active"  : "")">
+                           
+                        <a class="page-link" href="/Home/Index?pageNumber=@i">@i</a>
+                    </li>
+                    
+                }
+            </ul>
+        </nav>
+        </div>
     </div>
+
+
+</div>
+
 
 <style>
     #route {
@@ -76,10 +84,10 @@
 </style>
 
 
-<script>
+@*<script>
     document.getElementById('route').addEventListener('click', function () {
         window.location.href = '/Home/addBlog'
 
     })
-</script>
+</script>*@
 

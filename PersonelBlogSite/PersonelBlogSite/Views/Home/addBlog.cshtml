@@ -1,51 +1,55 @@
 ﻿
 @model Blog
+@using Microsoft.AspNetCore.Http
 
+@{
+    int? id = Context.Session.GetInt32("id");
+}
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<section class="vh-100" style="background-color: #9A616D; border-radius:10px 10px">
+<section class="vh-100" style="background-color: #555; border-radius:10px 10px">
     <div class="container py-5 h-100" style="border-radius:10px 10px">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col col-xl-10">
                 <div class="card" style="border-radius: 1rem;">
-                  
-
-                        <div id="route">
-                            <form method="post" id="form">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="title" placeholder="Başlık" style="border-radius: 1rem;" />
-                                </div>
-                                <br />
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="subtitle" placeholder="Alt Başlık" style="border-radius: 1rem;" />
-                                </div>
-                                <br />
-                                <div id="summernote" style="background-color:white">
 
 
-                                </div>
-                                <br />
-                                <div class="form-group">
-                                    <input type="file" class="form-control" asp-for="ImagePath" style="border-radius: 1rem;" />
-                                </div>
-                                <br />
-                                @Html.DropDownList("Categories", null, "Bir Kategori Seçiniz", new { @class = "form-control" })
-                                <br />
-                                <div class="btn-group-toggle">
-                                    <button type="button" onclick="Save()" id="blogSave" class="btn btn-primary" style="border-radius:5px 5px"> Kaydet</button>
-                                </div>
+                    <div id="route">
+                        <form method="post" id="form">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="title" placeholder="Başlık" style="border-radius: 1rem;" />
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="subtitle" placeholder="Alt Başlık" style="border-radius: 1rem;" />
+                            </div>
+                            <br />
+                            <div id="summernote" style="background-color:white">
 
-                            </form>
 
-                        </div>
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <input type="file" class="form-control" asp-for="ImagePath" style="border-radius: 1rem;" />
+                            </div>
+                            <br />
+                            @Html.DropDownList("Categories", null, "Bir Kategori Seçiniz", new { @class = "form-control" })
+                            <br />
+                            <div class="btn-group-toggle">
+                                <button type="button" onclick="Save()" id="blogSave" class="btn btn-primary" asp-action="Save" style="border-radius:5px 5px">Kaydet</button>
+                            </div>
+
+                        </form>
 
                     </div>
+
                 </div>
             </div>
         </div>
-    
+    </div>
+
 
 </section>
 
